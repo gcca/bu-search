@@ -1,0 +1,16 @@
+*.md
+*.log
+*.json
+*.yaml
+*.yml
+.env
+.git/
+.github/
+__pycache__/
+initdb/
+sql/
+scripts/
+docs/
+requirements-dev.txt
+Dockerfile
+docker-compose.yml

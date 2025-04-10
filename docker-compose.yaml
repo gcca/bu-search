@@ -1,0 +1,25 @@
+services:
+
+  web:
+    image: bu-search
+    ports:
+      - 8000:8000
+    environment:
+      DEBUG: True
+      DATABASE_URL: postgresql://user:password@db/db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+
+  cache:
+    image: memcached:latest
+    ports:
+      - 11211:11211
