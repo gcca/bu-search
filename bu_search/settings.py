@@ -54,10 +54,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
-    "django.contrib.staticfiles",
     "django_htmx",
     "bum_poc",
 ]
+
+if not DEBUG:
+    INSTALLED_APPS.insert(
+        INSTALLED_APPS.index("whitenoise.runserver_nostatic") + 1,
+        "django.contrib.staticfiles",
+    )
 
 ASGI_APPLICATION = "bu_search.asgi.application"
 

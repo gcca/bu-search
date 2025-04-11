@@ -1,6 +1,22 @@
+{% for repo in page.object_list %}
 <div class="item">
-  <h2>{{ full_name }}</h2>
-  <p>{{ description }}</p>
-  <a href="{{ html_url }}">View on GitHub</a>
-  <div class=".repo-readme">{{ readme }}</div>
+  <b>{{ repo.full_name }}</b>
+  <p>{{ repo.description }}</p>
+  <p>
+    <a href="{{ repo.html_url }}" class="btn btn-primary btn-sm" target="_blank">Ver en GitHub</a>
+    <a href="{{ repo.html_url }}/issues" class="btn btn-secondary btn-sm" target="_blank">Ver Issues</a>
+  </p>
+  <div class="overflow-auto" style="max-height: 300px;">{{ repo.readme | safe }}</div>
+  <hr>
 </div>
+{% endfor %}
+
+{% if page.has_next %}
+<div id="search-more" class="text-center">
+  <button class="btn btn-link mt-3" hx-get="{% url 'bum_poc:partial-search' %}" hx-target="#search-more"
+    hx-trigger="click" hx-swap="outerHTML"
+    hx-vals='{"q": "{{ request.GET.q }}", "portlet_type": "repos", "page": "{{ page.next_page_number }}"}'>
+    Más resultados
+  </button>
+</div>
+{% endif %}
